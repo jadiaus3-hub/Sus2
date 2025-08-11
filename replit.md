@@ -1,6 +1,6 @@
 # Overview
 
-This is a full-stack web application built with React and Express.js, designed as a demonstration of modern web development patterns. The application features a clean, modern UI built with React and shadcn/ui components, backed by an Express.js API server. It's configured for deployment on Vercel and includes comprehensive tooling for development, database management, and UI components.
+This is a Vercel-compatible full-stack web application built with plain HTML/CSS/JavaScript frontend and Node.js serverless functions backend. The project demonstrates Vercel's file-based routing with a simple API integration test. It features a clean, modern UI with vanilla JavaScript, backed by Node.js serverless API functions in the /pages/api/ directory structure required by Vercel.
 
 # User Preferences
 

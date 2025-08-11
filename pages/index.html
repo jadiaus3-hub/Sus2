@@ -50,18 +50,24 @@
                             &nbsp;&nbsp;📄 index.html<br>
                             &nbsp;&nbsp;📁 api/<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;📄 hello.js<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;📄 status.js<br>
                             📁 public/<br>
                             &nbsp;&nbsp;📄 style.css<br>
-                            📄 package.json
+                            📄 package.json<br>
+                            📄 vercel.json
                         </div>
                     </div>
                     <div>
-                        <h4>API Endpoint</h4>
+                        <h4>API Endpoints</h4>
                         <div class="endpoint">
                             <span class="method">GET</span>
                             <span class="path">/api/hello</span>
                         </div>
-                        <p>Returns a JSON response with a greeting message from the backend.</p>
+                        <div class="endpoint" style="margin-top: 0.5rem;">
+                            <span class="method">GET</span>
+                            <span class="path">/api/status</span>
+                        </div>
+                        <p>Node.js serverless functions running on Vercel. No PHP runtime required.</p>
                     </div>
                 </div>
             </div>
