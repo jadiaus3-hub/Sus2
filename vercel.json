@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "pages/api/hello.js": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/style.css",
+      "destination": "/public/style.css"
+    }
+  ]
+}

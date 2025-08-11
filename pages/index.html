@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vercel Fullstack Demo</title>
+    <meta name="description" content="A simple demonstration of full-stack deployment with Node.js API and interactive frontend showcasing API integration.">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vercel Fullstack Demo</h1>
+            <p>A simple demonstration of full-stack deployment on Vercel with Node.js API and interactive frontend.</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <h2>API Integration Test</h2>
+                <p>Click the button below to fetch data from the backend API endpoint.</p>
+                
+                <button id="fetchButton" data-testid="button-fetch-api-data">
+                    Fetch API Data
+                </button>
+
+                <div id="loading" class="loading hidden" data-testid="loading-state">
+                    <div class="spinner"></div>
+                    <span>Fetching data from API...</span>
+                </div>
+
+                <div id="response" class="response hidden" data-testid="response-container">
+                    <h3>API Response:</h3>
+                    <pre id="responseData" data-testid="response-data"></pre>
+                </div>
+
+                <div id="error" class="error hidden" data-testid="error-container">
+                    <h3>Error Occurred:</h3>
+                    <p id="errorMessage" data-testid="error-message"></p>
+                    <button id="retryButton" data-testid="button-retry">Try Again</button>
+                </div>
+            </div>
+
+            <div class="tech-details">
+                <h3>Technical Implementation</h3>
+                <div class="grid">
+                    <div>
+                        <h4>Project Structure</h4>
+                        <div class="code-block">
+                            📁 pages/<br>
+                            &nbsp;&nbsp;📄 index.html<br>
+                            &nbsp;&nbsp;📁 api/<br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;📄 hello.js<br>
+                            📁 public/<br>
+                            &nbsp;&nbsp;📄 style.css<br>
+                            📄 package.json
+                        </div>
+                    </div>
+                    <div>
+                        <h4>API Endpoint</h4>
+                        <div class="endpoint">
+                            <span class="method">GET</span>
+                            <span class="path">/api/hello</span>
+                        </div>
+                        <p>Returns a JSON response with a greeting message from the backend.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const fetchButton = document.getElementById('fetchButton');
+        const retryButton = document.getElementById('retryButton');
+        const loading = document.getElementById('loading');
+        const response = document.getElementById('response');
+        const error = document.getElementById('error');
+        const responseData = document.getElementById('responseData');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function hideAll() {
+            loading.classList.add('hidden');
+            response.classList.add('hidden');
+            error.classList.add('hidden');
+        }
+
+        function showLoading() {
+            hideAll();
+            loading.classList.remove('hidden');
+            fetchButton.disabled = true;
+        }
+
+        function showResponse(data) {
+            hideAll();
+            responseData.textContent = JSON.stringify(data, null, 2);
+            response.classList.remove('hidden');
+            fetchButton.disabled = false;
+        }
+
+        function showError(message) {
+            hideAll();
+            errorMessage.textContent = message;
+            error.classList.remove('hidden');
+            fetchButton.disabled = false;
+        }
+
+        async function fetchApiData() {
+            showLoading();
+            
+            try {
+                const apiResponse = await fetch('/api/hello');
+                
+                if (!apiResponse.ok) {
+                    throw new Error(`HTTP error! status: ${apiResponse.status}`);
+                }
+                
+                const data = await apiResponse.json();
+                showResponse(data);
+            } catch (err) {
+                showError(err.message || 'Failed to fetch data from the API. Please check your connection and try again.');
+            }
+        }
+
+        fetchButton.addEventListener('click', fetchApiData);
+        retryButton.addEventListener('click', () => {
+            hideAll();
+        });
+    </script>
+</body>
+</html>
